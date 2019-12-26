@@ -1,4 +1,4 @@
-# Go MonGO CRUD #
+# Go MongoDB CRUD #
 Insert, Update, Delete & View in User details using Golang with MongoDB
 
 ## RUN
