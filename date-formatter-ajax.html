@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <style>
+        .button {
+            height: 30px;
+            width: 80px;
+            font-size: 14px;
+            text-align: center;
+            background-color: #008CBA;
+            border-radius: 8px;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#ajaxBtn').click(function () {
+                var date_val = $("#date-value").val()
+                $.ajax({
+                    url: 'http://localhost:8000/api/v2/date',
+                    type: 'POST',  // http method
+                    crossDomain: true,
+                    data: { date: date_val },  // data to submit
+                    success: function (data, status, xhr) {
+                        console.log(data)
+                        $('p').append('status: ' + status + ', date: ' + data.date.toString());
+                    },
+                    error: function (jqXhr, textStatus, errorMessage) {
+                        $('p').append('Error: ' + errorMessage);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <h1> Date Formatter </h1>
+    <input type="text" id="date-value" class="w3-input" style="width: 30%;" value="2019-12-26T10:04:05"> </br></br>
+    <input type="button" id="ajaxBtn" value="Format" class="button" />
+    <p>
+    </p>
+</body>
+
+</html>

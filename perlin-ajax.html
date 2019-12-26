@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <style>
+        .button {
+            height: 40px;
+            width: 110px;
+            font-size: 14px;
+            text-align: center;
+            background-color: #008CBA;
+            border-radius: 8px;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#ajaxBtn').click(function () {
+                var x_val = $("#x-value").val()
+                var y_val = $("#y-value").val()
+                $.ajax({
+                    url: 'http://localhost:8000/api/v3/perlin/2D',
+                    type: 'POST',  // http method
+                    crossDomain: true,
+                    data: { x: x_val, y: y_val },  // data to submit
+                    success: function (data, status, xhr) {
+                        console.log(data)
+                        $('p').append('status: ' + status + ', data: ' + JSON.stringify(data.data));
+                    },
+                    error: function (jqXhr, textStatus, errorMessage) {
+                        $('p').append('Error: ' + errorMessage);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <h1> PERLIN NOISE 2D</h1>
+    <input type="text" class="w3-input" style="width: 30%;" id="x-value" placeholder="x point; e.g = 5"></br></br>
+    <input type="text" class="w3-input" style="width: 30%;"  id="y-value" placeholder="y point; e.g = 5"> </br></br></br>
+    <input type="button" id="ajaxBtn" value="Send request" class="button"/>
+    <p>
+    </p>
+</body>
+
+</html>
